@@ -1,0 +1,57 @@
+import java.util.LinkedList;
+import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintStream;
+
+public class PersonList
+{
+    private LinkedList<Person> list;
+
+    // Constructor initializes an empty list
+    public PersonList()
+    {
+        list = new LinkedList<>();
+    }
+
+    // Method to store persons from input stream
+    public void store(Scanner input)
+    {
+        while (input.hasNextLine())
+        {
+            String[] data = input.nextLine().split(",");
+            if (data.length == 3)
+            {
+                list.add(new Person(data[0].trim(), data[1].trim(), data[2].trim()));
+            }
+        }
+    }
+
+    // Method to display persons to output stream
+    public void display(PrintStream output)
+    {
+        for (Person p : list)
+        {
+            output.println(p);
+        }
+    }
+
+    // Method to find person by ID
+    public int find(String sid)
+    {
+        for (int i = 0; i < list.size(); i++)
+        {
+            if (list.get(i).getId().equals(sid))
+            {
+                return i;
+            }
+        }
+        return -1; // Return -1 if person with ID is not found
+    }
+
+    // Additional method to get list size (optional, useful for testing)
+    public int size()
+    {
+        return list.size();
+    }
+}
